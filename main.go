@@ -8,12 +8,10 @@ import (
 
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello! you've requested %s\n", r.URL.Path)
-	})
+	srv:=http.FileServer(http.Dir("./dist"))
 
 	port:="8080"
-	err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%s", port),srv)
 	if err != nil {
 		panic(err)
 	}

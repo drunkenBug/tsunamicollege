@@ -37,7 +37,7 @@ body{
   left:50%;
   transform:translate(-50%,0);
   padding:2rem;
-  border-radius:2rem;
+  border-radius:4rem;
 }
 
 </style>

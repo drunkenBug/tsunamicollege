@@ -41,18 +41,18 @@ export default {
 <style media="screen">
 .upper{
   background: white;
-  border-radius: 2rem;
+  border-radius: 4rem;
 }
 .face{
   padding:1rem 0 2rem 0;
   border:1rem;
-  border-radius:2rem;
+  border-radius:4rem;
 }
 
 .horizontal{
   background: #00f;
-  padding: 2rem 0 0 0;
-  border-radius: 0 0 2rem 2rem;
+  padding: 4rem 0 0 0;
+  border-radius: 0 0 4rem 4rem;
   margin: 0;
   border: 0;
   width: 100%;

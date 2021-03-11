@@ -1,13 +1,8 @@
 [
 	{"id":1,"title":"what is 2+2","solution":"4"},
 	{"id":2,"title":"what is 3•4","solution":"12"},
-	{"id":3,"title":"what is 5^2","solution":"25"},
-	{"id":4,"title":"what is 3+6","solution":"9"},
-	{"id":5,"title":"what is 7•2","solution":"14"},
-	{"id":6,"title":"what is 8-4","solution":"4"},
 	{"id":7,"title":"what is 6/3","solution":"2"},
 	{"id":8,"title":"what is 12•3","solution":"36"},
-	{"id":9,"title":"what is 3•3","solution":"9"},
 	{"id":10,"title":"what is 17-9","solution":"8"},
 	{"id":11,"title":"what is 33+15","solution":"48"},
 	{"id":12,"title":"what is 7•8","solution":"56"},

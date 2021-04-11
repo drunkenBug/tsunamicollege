@@ -1,0 +1,54 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  /* color: #000; */
+
+}
+
+:root{
+  --omega:#ddf;
+  --alpha:#44c;
+  --beta:#00a;
+  --gamma:#005;
+}
+
+#nav{
+  color:black;
+}
+
+.home{
+  color: white;
+}
+
+h1{color: var(--omega);}
+
+body{
+  color:var(--omega);
+  background: var(--gamma);
+  color: var(--omega);
+}
+
+button.test{
+  background: var(--beta);
+  border-radius: 2vmax;
+  padding:1vmax;
+}
+input{
+  background: white;
+  border-radius:2vmax;
+  padding:1vmax;
+}
+.frame{
+  background: #bef;
+  background: var(--alpha);
+}
+.scrollbox{
+  margin:2rem;
+  border:2rem;
+  padding:2rem;
+  height:16rem;
+  line-height:1rem;
+  overflow:auto;
+}

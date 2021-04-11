@@ -1,12 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Start from '../views/Start.vue'
 import Test from '../views/Test.vue'
 import Editor from '../components/Editor.vue'
+import Login from '../components/Login.vue'
+require('../style.css')
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Start',
+    component: Start
+  },
+  {path:'/login',
+    name: 'Login',
+    component:Login
   },
   {
     path: '/about',
@@ -17,7 +23,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/test',
+    path: '/test/:id',
     name: 'Test',
     component: Test,
   },

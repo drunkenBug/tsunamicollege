@@ -1,9 +1,9 @@
 <template>
-  <div class="whiteblock">
+  <div class="frame scrollbox">
     <div class="question">
       <h2>{{content.title}}</h2>
-      <input type="text" v-model='input' ref="input" @keyup.enter='onEnter'>
-      <button type="button" name="button" @click='go' >
+      <input class="test" type="text" v-model='input' ref="input" @keyup.enter='onEnter'>
+      <button class="test" type="button" name="button" @click='go' >
         <div class="go">
           GO
         </div>

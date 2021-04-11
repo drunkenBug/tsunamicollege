@@ -1,11 +1,11 @@
 <template>
   <div class="test">
-    <h1>The Entrance Test</h1>
+    <h1>{{topic}}</h1>
     <div v-if="questionsLoaded">
       <Question :content="question" ref="question" @solved="solved"/>
     </div>
     <div class="next">
-      <button type="button" ref="next" @click ="next">next</button>
+      <button class="test" type="button" ref="next" @click ="next">next</button>
     </div>
   </div>
 
@@ -26,12 +26,12 @@ export default {
       question:{},
       data:[],
       index:1,
+      topic:this.$route.params.id,
 
     }
   },
   mounted(){
     this.getQuestionById(1)
-    console.log("refs: "+this.$refs)
   },
   methods:{
     getQuestionById(id){
@@ -62,8 +62,3 @@ export default {
   }
 }
 </script>
-<style>
-  .next{
-    padding:1rem;
-  }
-</style>

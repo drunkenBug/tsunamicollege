@@ -1,5 +1,6 @@
 package main
 
+
 import (
 	"encoding/json"
 	"fmt"
@@ -16,7 +17,7 @@ func process(w http.ResponseWriter, request *http.Request){
 	fmt.Println(init)
 
 	var response database.Question
-	response=database.GetById(init.ID)
+	response=database.GetQuestion(init.Topic,init.No)
 
 	w.Header().Set("Content-Type","application/json; charset=UTF-8")
 	w.Header().Set("Access-Control-Allow-Origin","*")

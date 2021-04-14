@@ -31,11 +31,11 @@ export default {
     }
   },
   mounted(){
-    this.getQuestionById(1)
+    this.getQuestionById(this.topic,1)
   },
   methods:{
-    getQuestionById(id){
-      var data = {"op":"GET","id":id}
+    getQuestionById(topic,no){
+      var data = {"op":"GET","topic":topic,"no":no}
 
       console.log(data)
       axios({ method: "POST", url: "/api/getQuestion", data: data, headers: {"content-type": "text/plain" } }).then(result => {
@@ -55,7 +55,7 @@ export default {
     },
     next(){
       this.index=this.index+1,
-      this.getQuestionById(this.index)
+      this.getQuestionById(this.topic,this.index)
       this.$refs.question.start()
     },
 

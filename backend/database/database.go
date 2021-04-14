@@ -22,13 +22,20 @@ func Start() {
 	db.AutoMigrate(&Question{})
 	var result Question
 	db.First(&result, 1)
-	//Test()
+	Test()
 }
 
-func GetById(id uint)Question{
-	var question Question
-	db.First(&question,id)
-	return question
+func GetQuestion(topic string, no uint)Question{
+	//topic:="plus"
+        //no:=1
+        fmt.Println("find where topic="+topic+" no = "+fmt.Sprint(no))
+        var t1 Topic
+        db.Where("title = ?",topic).First(&t1)
+        //var q1 database.Question
+        var qs []Question
+        db.Model(&t1).Association("Questions").Find(&qs)
+
+        return (qs[no-1])
 }
 
 func InsertQuestion(data InsertData) Question{
@@ -40,15 +47,9 @@ func InsertQuestion(data InsertData) Question{
 }
 
 func Test() {
-	fmt.Println("test")
-	var questions []Question
-	result:=db.Find(&questions)
-	fmt.Println("result: ",result.RowsAffected," found")
-	for _,q :=range questions{
-		fmt.Println("question: ",q)
-	}
-	for i:=uint(1);i<4;i+=1{
-		question:=GetById(i)
-		fmt.Println(question.Title)
-	}
+
+	fmt.Println("test database: ")
+	DBprint(db)
+	question:=GetQuestion("Plus",1)
+	fmt.Println("retrieved smaple questin: ",question)
 }

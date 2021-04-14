@@ -1,52 +1,61 @@
 package main
 
 import(
+	"goserver/database"
 	"encoding/json"
 	"fmt"
 	"gorm.io/driver/sqlite"
         "gorm.io/gorm"
         "io/ioutil"
 )
-type Question struct {
-        Id uint `json:"id"`
-        Title    string `json:"title"`
-        Solution string `json:"solution"`
-}
 
 var (
         db *gorm.DB
 )
 
 func main(){
+
+
+	//OPEN DATABASE
 	var err error
-        //reading in json file
-        fileData, err := ioutil.ReadFile("questions.json")
+        db, err = gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+        if err != nil {
+                panic("failed opening database")
+        }
+	//delete all
+	db.Where("1=1").Unscoped().Delete(&database.Question{})
+	db.Where("1=1").Unscoped().Delete(&database.Topic{})
+
+        //reading in json questions
+        questionData, err := ioutil.ReadFile("questions.json")
         if err != nil {
                 fmt.Print(err)
         }
 
-        var questions []Question
-        err = json.Unmarshal(fileData, &questions)
+	var questionMap map[string][]database.Question
+        err = json.Unmarshal(questionData, &questionMap)
         if err != nil {
                 fmt.Println("error reading json: ", err)
         }
+	db.AutoMigrate(&database.Topic{})
+	db.AutoMigrate(&database.Question{})
+	
+	for topicTitle,questions :=range questionMap{
+		topic:=database.Topic{Title:topicTitle,Questions:questions}
+		db.Create(&topic)
+	}
+	fmt.Println("testing...")
+	database.DBprint(db)
+	topic:="Plus"
+	no:=1
+	fmt.Println("find where topic="+topic+" id = "+fmt.Sprint(no))
+	var t1 database.Topic
+	db.Where("title = ?",topic).First(&t1)
+	//var q1 database.Question
+	var qs []database.Question
+	db.Model(&t1).Association("Questions").Find(&qs)
 
+	fmt.Println(qs[no])
 
-        fmt.Println("start database")
-
-	//OPEN DATABASE
-        db, err = gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
-	//delete all
-	db.Where("1=1").Unscoped().Delete(&Question{})
-
-        if err != nil {
-                panic("failed opening database")
-        }
-        fmt.Println("opened database")
-        db.AutoMigrate(&Question{})
-
-        for _,questionData :=range questions{
-                fmt.Println("adding question: ",questionData.Title)
-                db.Create(&Question{Title: questionData.Title,Solution: questionData.Solution})
-        }
+	fmt.Println("\ncreated Database printing results:")
 }

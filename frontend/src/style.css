@@ -18,6 +18,7 @@
   color:black;
 }
 
+
 .home{
   color: white;
 }
@@ -28,6 +29,12 @@ body{
   color:var(--omega);
   background: var(--gamma);
   color: var(--omega);
+}
+h1 {
+  font-size: min(40px, 8vw);
+}
+h2{
+  font-size: min(20px,4vw);
 }
 
 button.test{
@@ -58,6 +65,5 @@ input{
   padding: 5vh;
   height:50vh;
   height:200px;
-  line-height:1rem;
   overflow:auto;
 }

@@ -6,7 +6,7 @@
 
       </div>
 
-      <p>Zeig was du kannst</p>
+      <h2>Zeig was du kannst</h2>
     </div>
     <TopicPicker/>
 

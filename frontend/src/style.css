@@ -55,15 +55,13 @@ input{
   background: var(--alpha);
   margin:auto;
   border-radius: 5vmin;
-  width:800px;
-  width:80vw;
+  width:max(800px,80vw);
 }
 .scrollbox{
   /* background-color: red; */
   margin:auto;
   border:0;
   padding: 5vh;
-  height:50vh;
-  height:200px;
+  height:max(50vh,200px)
   overflow:auto;
 }

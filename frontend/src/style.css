@@ -35,20 +35,29 @@ button.test{
   border-radius: 2vmax;
   padding:1vmax;
 }
+button.topicButton{
+	width:100%;
+}
 input{
+  margin:auto;
   background: white;
   border-radius:2vmax;
   padding:1vmax;
 }
 .frame{
-  background: #bef;
   background: var(--alpha);
+  margin:auto;
+  border-radius: 5vmin;
+  width:800px;
+  width:80vw;
 }
 .scrollbox{
-  margin:2rem;
-  border:2rem;
-  padding:2rem;
-  height:16rem;
+  /* background-color: red; */
+  margin:auto;
+  border:0;
+  padding: 5vh;
+  height:50vh;
+  height:200px;
   line-height:1rem;
   overflow:auto;
 }

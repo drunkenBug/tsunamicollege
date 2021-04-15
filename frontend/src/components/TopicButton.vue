@@ -1,8 +1,8 @@
 <template>
   <div class="element">
-    <button class='test'>
+    <button class='topicButton'>
       <router-link :to="{name:'Test',params:{id:topicID}}" >
-        <h2>✭✭✭☆☆ {{topicID}}</h2>
+        <h2> {{topicID}}</h2>
       </router-link>
     </button>
   </div>

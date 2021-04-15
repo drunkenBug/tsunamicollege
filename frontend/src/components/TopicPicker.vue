@@ -38,12 +38,3 @@ import TopicButton from './TopicButton.vue'
     }
   }
 </script>
-
-<style media="screen">
-  .frame{
-    margin:3rem;
-    background-color: white;
-    border-radius: 2rem;
-  }
-
-</style>

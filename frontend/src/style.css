@@ -62,6 +62,6 @@ input{
   margin:auto;
   border:0;
   padding: 5vh;
-  height:max(50vh,200px)
+  height:max(50vh,200px);
   overflow:auto;
 }

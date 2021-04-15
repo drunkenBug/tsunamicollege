@@ -55,7 +55,7 @@ input{
   background: var(--alpha);
   margin:auto;
   border-radius: 5vmin;
-  width:max(800px,80vw);
+  width:80vw;
 }
 .scrollbox{
   /* background-color: red; */

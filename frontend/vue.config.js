@@ -9,7 +9,7 @@ module.exports = {
 
           // for local testing:
           //target:'http://localhost:3080',
-          
+
           changeOrigin: true
         },
       }

@@ -1,7 +1,7 @@
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+   font-family: Avenir, Helvetica, Arial, sans-serif;
+  /*-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;*/
   text-align: center;
   /* color: #000; */
 
@@ -14,21 +14,59 @@
   --gamma:#005;
 }
 
-#nav{
-  color:black;
-}
+
 body{
-  color:var(--omega);
   background: var(--gamma);
   color: var(--omega);
 }
+a{
+  text-decoration: none;
+  color:var(--alpha)
+}
 
-h1 {
-  font-size: 8vw;
+@media (min-width:320px)  {
+  /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+  h1 {
+    font-size: 4em;
+  }
+  h2{
+    font-size: 3em;
+    color:var(--omega);
+  }
+  button{
+    font-size: 1em;
+  }
+  h3{
+    font-size: 3em;
+    color:var(--omega);
+  }
+  .nav{
+    text-decoration: none;
+    font-size:2em;
+  }
 }
-h2{
-  font-size: 4vw;
+@media (min-width:480px)  { /* smartphones, Android phones, landscape iPhone */ }
+@media (min-width:600px)  { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
+@media (min-width:801px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */
+  a{
+    font-size: 1em;
+  }
+  h2{
+    font-size: 2em;
+  }
+  h3{
+    font-size: 1.2em;
+  }
+  .top{
+    font-size: 1;
+  }
+  .nav{
+    font-size: 1.5em
+  }
 }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+
 
 button.test{
   background: var(--beta);
@@ -57,4 +95,7 @@ input{
   padding: 5vh;
   height:50vh;
   overflow:auto;
+}
+.question{
+  padding:1em;
 }

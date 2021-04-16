@@ -1,6 +1,7 @@
 <template>
-  <div class="frame scrollbox">
+  <div class="bubble">
     <div class="question">
+
       <h2>{{content.title}}</h2>
       <input class="test" type="text" v-model='input' ref="input" @keyup.enter='onEnter'>
       <button class="test" type="button" name="button" @click='go' >

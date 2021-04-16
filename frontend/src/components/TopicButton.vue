@@ -2,7 +2,7 @@
   <div class="element">
     <button class='topicButton'>
       <router-link :to="{name:'Test',params:{id:topicID}}" >
-        <h2> {{topicID}}</h2>
+        <h3> {{topicID}}</h3>
       </router-link>
     </button>
   </div>
@@ -35,15 +35,3 @@
     }
   }
 </script>
-<style media="screen">
-  h2{
-    color:#fff;
-  },
-  div{
-    background-color:red;
-  },
-  button.element{
-    background-color:red;
-  }
-
-</style>

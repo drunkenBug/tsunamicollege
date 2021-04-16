@@ -1,5 +1,5 @@
 <template>
-  <div class="frame">
+  <div class="bubble">
 
     <div class ='scrollbox'>
       <TopicButton topicID="Plus"/>

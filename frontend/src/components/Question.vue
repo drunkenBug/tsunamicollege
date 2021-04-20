@@ -3,7 +3,7 @@
     <div class="question">
 
       <h2>{{content.title}}</h2>
-      <input class="test" type="text" v-model='input' ref="input" @keyup.enter='onEnter'>
+      <input class="test" type="number" v-model='input' ref="input" @keyup.enter='onEnter'>
       <button class="test" type="button" name="button" @click='go' >
         <div class="go">
           GO

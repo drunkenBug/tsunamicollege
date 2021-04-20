@@ -15,7 +15,9 @@
     <h2>Zeig was du kannst</h2>
 
     <TopicPicker/>
+    <div class="spacer">
 
+    </div>
 
 </template>
 <script>

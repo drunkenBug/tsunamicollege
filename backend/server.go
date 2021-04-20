@@ -16,7 +16,7 @@ func process(w http.ResponseWriter, request *http.Request){
 	decoder.Decode(&init)
 	fmt.Println(init)
 
-	var response database.Question
+	var response database.QuestionData
 	response=database.GetQuestion(init.Topic,init.No)
 
 	w.Header().Set("Content-Type","application/json; charset=UTF-8")
@@ -30,18 +30,11 @@ func process(w http.ResponseWriter, request *http.Request){
 
 func processSet(w http.ResponseWriter, request *http.Request){
 	decoder:=json.NewDecoder(request.Body)
-	var inserter database.InsertData
+	var inserter database.Question
 	decoder.Decode(&inserter)
 
-	var sol database.Question
-	sol=database.InsertQuestion(inserter)
+	database.InsertQuestion(inserter,nil,nil)
 
-	w.Header().Set("Content-Type","application/json; charset=UTF-8")
-	w.Header().Set("Access-Control-Allow-Origin","*")
-	w.WriteHeader(http.StatusOK)
-	if err:= json.NewEncoder(w).Encode(sol);err!=nil{
-		panic(err)
-	}
 }
 
 func main() {

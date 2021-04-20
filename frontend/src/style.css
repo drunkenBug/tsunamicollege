@@ -1,7 +1,7 @@
 #app {
    font-family: Avenir, Helvetica, Arial, sans-serif;
-  /*-webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;*/
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   /* color: #000; */
 
@@ -14,6 +14,27 @@
   --gamma:#005;
 }
 
+.face-image{
+  z-index: -100;
+  padding: 0;
+  border:0;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left:0px;
+  height: 400px;
+  background: white;
+  background-image: url(assets/tsunami.png);
+  background-repeat: no-repeat;
+  background-size: 101%;
+  background-position:left;
+  background-position:center;
+}
+.face{
+  width:100%;
+  height:350px;
+
+}
 
 body{
   background: var(--gamma);
@@ -33,8 +54,17 @@ a{
     font-size: 3em;
     color:var(--omega);
   }
+  input{
+    font-size: 3em;
+    width:90%
+  }
   button{
     font-size: 1em;
+    color:var(--omega);
+  }
+  button.test{
+    font-size: 3em;
+    padding:0.5em;
   }
   h3{
     font-size: 3em;
@@ -43,6 +73,7 @@ a{
   .nav{
     text-decoration: none;
     font-size:2em;
+    /* background: white; */
   }
 }
 @media (min-width:480px)  { /* smartphones, Android phones, landscape iPhone */ }
@@ -54,6 +85,10 @@ a{
   }
   h2{
     font-size: 2em;
+  }
+  input{
+    font-size: 2em;
+    width:50%;
   }
   h3{
     font-size: 1.2em;
@@ -80,7 +115,7 @@ input{
   margin:auto;
   background: white;
   border-radius:2vmax;
-  padding:1vmax;
+  padding:0.5em;
 }
 .bubble{
   background: var(--alpha);
@@ -88,6 +123,7 @@ input{
   border-radius: 5vmin;
   width:80vw;
 }
+
 .scrollbox{
   /* background-color: red; */
   margin:auto;
@@ -97,5 +133,5 @@ input{
   overflow:auto;
 }
 .question{
-  padding:1em;
+  padding:1em 0 1em 0;
 }

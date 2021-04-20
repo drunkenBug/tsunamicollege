@@ -1,6 +1,7 @@
 package main
 
 import(
+	"os"
 	"goserver/database"
 	"encoding/json"
 	"fmt"
@@ -23,39 +24,41 @@ func main(){
                 panic("failed opening database")
         }
 	//delete all
-	db.Where("1=1").Unscoped().Delete(&database.Question{})
-	db.Where("1=1").Unscoped().Delete(&database.Topic{})
+	db.Where("1=1").Unscoped().Delete(&database.QuestionData{})
+
+	//read topics 
+	topicsRaw, err := ioutil.ReadFile("topics.json")
+	fmt.Println(string(topicsRaw))
+	if err != nil{
+
+		fmt.Println("error reading topics")
+	}
+	var topics map[string]*database.TopicData
+	json.Unmarshal(topicsRaw,&topics)
+	fmt.Println(topics)
 
         //reading in json questions
-        questionData, err := ioutil.ReadFile("questions.json")
+	questionData, err := ioutil.ReadFile("questions.json")
         if err != nil {
                 fmt.Print(err)
         }
 
-	var questionMap map[string][]database.Question
-        err = json.Unmarshal(questionData, &questionMap)
+	var questions []database.Question
+        err = json.Unmarshal(questionData,&questions)
         if err != nil {
                 fmt.Println("error reading json: ", err)
         }
-	db.AutoMigrate(&database.Topic{})
-	db.AutoMigrate(&database.Question{})
-	
-	for topicTitle,questions :=range questionMap{
-		topic:=database.Topic{Title:topicTitle,Questions:questions}
-		db.Create(&topic)
+	db.AutoMigrate(&database.QuestionData{})
+
+	for _,question :=range questions{
+		id:=database.InsertQuestion(question,db,topics)
+		if id>0{
+			topics[question.TopicTitle].Questions=append(topics[question.TopicTitle].Questions,id)
+		}
 	}
-	fmt.Println("testing...")
-	database.DBprint(db)
-	topic:="Plus"
-	no:=1
-	fmt.Println("find where topic="+topic+" id = "+fmt.Sprint(no))
-	var t1 database.Topic
-	db.Where("title = ?",topic).First(&t1)
-	//var q1 database.Question
-	var qs []database.Question
-	db.Model(&t1).Association("Questions").Find(&qs)
+	os.Remove("topics.json")
 
-	fmt.Println(qs[no])
-
-	fmt.Println("\ncreated Database printing results:")
+	raw,_:=json.Marshal(topics)
+	file,_:=os.Create("topics.json")
+	fmt.Fprint(file,string(raw))
 }

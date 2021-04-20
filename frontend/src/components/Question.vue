@@ -9,7 +9,7 @@
           GO
         </div>
       </button>
-      <p>{{result}}</p>
+      <h2>{{result}}</h2>
     </div>
 
   </div>
@@ -22,7 +22,7 @@
     ],
     data(){
       return {
-        result:"...",
+        result:"",
         input:""
       }
     },
@@ -50,6 +50,7 @@
     },
     created(){
       console.log("created")
+      console.log("name: ",localStorage.Plus);
     }
   }
 </script>

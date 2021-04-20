@@ -32,6 +32,7 @@ export default {
   },
   mounted(){
     this.getQuestionById(this.topic,1)
+    console.log(this.skillMap);
   },
   methods:{
     getQuestionById(topic,no){

@@ -8,7 +8,7 @@ module.exports = {
           target: 'http://134.209.242.22:3080',
 
           // for local testing:
-          //target:'http://localhost:3080',
+          target:'http://localhost:3080',
 
           changeOrigin: true
         },

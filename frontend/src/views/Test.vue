@@ -31,17 +31,22 @@ export default {
     }
   },
   mounted(){
-    this.getQuestionById(this.topic,1)
-    console.log(this.skillMap);
+    // this.getQuestionById(this.topic,1)
+    // this.getTopicInfo("Plus")
+    if (localStorage[this.topic]==null){
+      // console.log("no data on topic ",this.topic);
+    }
+    this.getQuestionByRating("Plus",100)
+
   },
   methods:{
     getQuestionById(topic,no){
       var data = {"op":"GET","topic":topic,"no":no}
 
-      console.log(data)
+      // console.log(data)
       axios({ method: "POST", url: "/api/getQuestion", data: data, headers: {"content-type": "text/plain" } }).then(result => {
-          console.log("receved question:")
-          console.log(result.data)
+          // console.log("receved question:")
+          // console.log(result.data)
           this.question=result.data
           this.questionsLoaded=true
           if (this.question.id==0){
@@ -49,6 +54,24 @@ export default {
           }
       }).catch(error =>{
             console.error(error);
+      })
+    },
+    getTopicInfo(topic){
+      var data={"op":"GETINFO","topic":topic,"no":0}
+      axios({method:"POST",url:"/api/getTopicInfo",data:data,headers:{"content-type":"text/plain"}}).then(result=>{
+        localStorage[topic+"Info"]=JSON.stringify(result.data);
+        // console.log("stored: ",localStorage[topic+"Info"]);
+      })
+    },
+    getQuestionByRating(topic,rating){
+      var data={"op":"GETBYRATING","topic":topic,"no":rating}
+      axios({method:"POST",url:"api/getQuestionByRating", data: data,headers:{"content-type":"text/plain"}}).then(result =>{
+        // console.log("receved question by rating: ");
+        // console.log(result.data);
+        this.question=result.data
+        this.questionsLoaded=true
+      }).catch(error =>{
+        console.log(error);
       })
     },
     solved(){

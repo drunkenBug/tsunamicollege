@@ -6,11 +6,11 @@
       <TopicButton topicID='Minus' />
       <TopicButton topicID="Ein mal eins"/>
       <TopicButton topicID="Geteilt"/>
-      <TopicButton topicID="Brüche" />
+      <!-- <TopicButton topicID="Brüche" />
       <TopicButton topicID='Prozente' />
       <TopicButton topicID="Funktionen"/>
       <TopicButton topicID="Koordinaten"/>
-      <TopicButton topicID="Graphen"/>
+      <TopicButton topicID="Graphen"/> -->
     </div>
   </div>
 

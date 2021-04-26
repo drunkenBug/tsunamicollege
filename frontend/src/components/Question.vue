@@ -49,8 +49,6 @@
       }
     },
     created(){
-      console.log("created")
-      console.log("name: ",localStorage.Plus);
     }
   }
 </script>

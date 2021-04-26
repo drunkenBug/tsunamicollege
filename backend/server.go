@@ -1,45 +1,39 @@
 package main
 
-
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"goserver/database"
+	"net/http"
 )
 
-func process(w http.ResponseWriter, request *http.Request){
+func process(w http.ResponseWriter, request *http.Request) {
 	//fmt.Println("processing request")
-	decoder:=json.NewDecoder(request.Body)
+	decoder := json.NewDecoder(request.Body)
 
 	var init database.RequestData
 	decoder.Decode(&init)
 	fmt.Println(init)
 
-	var response database.QuestionData
-	response=database.GetQuestion(init.Topic,init.No)
+	var response interface{}
+	if init.Op == "GET" {
+		response = database.GetQuestion(init.Topic, init.No)
+	} else if init.Op == "GETINFO" {
+		response = database.GetTopicInformation(init.Topic)
+	} else if init.Op == "GETBYRATING" {
+		response = database.GetQuestionByRating(init.Topic, init.No)
+	}
 
-	w.Header().Set("Content-Type","application/json; charset=UTF-8")
-	w.Header().Set("Access-Control-Allow-Origin","*")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
-	if err:= json.NewEncoder(w).Encode(response);err!=nil{
+	if err := json.NewEncoder(w).Encode(response); err != nil {
 		panic(err)
 	}
 }
 
-
-func processSet(w http.ResponseWriter, request *http.Request){
-	decoder:=json.NewDecoder(request.Body)
-	var inserter database.Question
-	decoder.Decode(&inserter)
-
-	database.InsertQuestion(inserter,nil,nil)
-
-}
-
 func main() {
 	database.Start()
-	http.HandleFunc("/api/getQuestion",process)
-	http.HandleFunc("/api/setQuestion",processSet)
+	http.HandleFunc("/api/", process)
 	http.ListenAndServe(":3080", nil)
 }

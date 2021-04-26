@@ -54,16 +54,26 @@ a{
     font-size: 3em;
     color:var(--omega);
   }
-  input{
-    font-size: 3em;
-    width:90%
-  }
+
   button{
     font-size: 1em;
     color:var(--omega);
   }
-  button.test{
+  input{
+
     font-size: 3em;
+    width:90%;
+    margin:0.5em;
+    background: white;
+    border-radius: 2vmax;
+    padding:0.5em;
+  }
+  button.test{
+    margin:0.5em;
+    font-size: 3em;
+    height:2em;
+    background: var(--beta);
+    border-radius: 2vmax;
     padding:0.5em;
   }
   h3{
@@ -87,7 +97,8 @@ a{
     font-size: 2em;
   }
   input{
-    font-size: 2em;
+    /* font-size: 2em;
+    height: 2em; */
     width:50%;
   }
   h3{
@@ -103,20 +114,11 @@ a{
 @media (min-width:1281px) { /* hi-res laptops and desktops */ }
 
 
-button.test{
-  background: var(--beta);
-  border-radius: 2vmax;
-  padding:1vmax;
-}
+
 button.topicButton{
 	width:100%;
 }
-input{
-  margin:auto;
-  background: white;
-  border-radius:2vmax;
-  padding:0.5em;
-}
+
 .bubble{
   background: var(--alpha);
   margin:auto;

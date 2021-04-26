@@ -11,7 +11,7 @@
 
     </div>
 
-    <h1 >Tsunami College</h1>
+    <h1>Tsunami College</h1>
     <h2>Zeig was du kannst</h2>
 
     <TopicPicker/>
@@ -41,19 +41,17 @@ export default {
 
     insertSkill(name,level){
       this.skillMap[name]=level
-      console.log(this.skillMap);
-      console.log(JSON.stringify(this.skillMap));
+      // console.log(this.skillMap);
+      // console.log(JSON.stringify(this.skillMap));
       var raw=JSON.stringify(this.skillMap)
-      console.log("raw:",raw);
+      // console.log("raw:",raw);
       var newcookie="skillmap="+raw
       document.cookie=newcookie
       localStorage[name]=level
     },
     welcome(){
 
-      for (var item in localStorage){
-        console.log(item);
-      }
+
 
       var c=document.cookie;
       var cookies = c.split(";")
@@ -67,7 +65,7 @@ export default {
           break
         }
       }
-      console.log("welcome found skills:",this.skillMap);
+      // console.log("welcome found skills:",this.skillMap);
       this.insertSkill("Plus",90)
 
 

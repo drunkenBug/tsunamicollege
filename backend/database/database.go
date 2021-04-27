@@ -38,14 +38,6 @@ func Start() {
 	Test()
 }
 
-func GetQuestion(topic string, no int) QuestionData {
-
-	id := indexer[topic].Questions[no].ID
-	var data QuestionData
-	db.First(&data, id)
-	return data
-}
-
 func InsertQuestion(question Question, remotedb *gorm.DB, topics map[string]*TopicData) int {
 	if remotedb == nil {
 		remotedb = db
@@ -81,39 +73,19 @@ func InsertQuestion(question Question, remotedb *gorm.DB, topics map[string]*Top
 	}
 }
 
-func GetTopicInformation(topic string) TopicInformation {
-	var topicData *TopicData
-	topicData = indexer[topic]
-
-	var info TopicInformation
-	info.Size = len(topicData.Questions)
-
-	var easyID = topicData.Questions[0].ID
-	var easyQuestion QuestionData
-	db.First(&easyQuestion, easyID)
-	info.Bottom = easyQuestion.Rating
-
-	var hardID = topicData.Questions[info.Size-1].ID
-	var hardQuestion QuestionData
-	db.First(&hardQuestion, hardID)
-	info.Top = hardQuestion.Rating
-
-	return info
-
-}
-
-func GetQuestionByRating(topic string, rating int) QuestionData {
+//finds the index of a question with given rating in TopicData
+func getNumberByRating(topicData TopicData, rating int) int {
+	var questions []QuestionNote
+	questions = topicData.Questions
 	var min, max int
 
 	min = 0
-	var questions []QuestionNote
-	questions = indexer[topic].Questions
 	max = len(questions) - 1
 	if questions[min].Rating >= rating {
-		return GetQuestion(topic, min)
+		return min
 	}
 	if questions[max].Rating <= rating {
-		return GetQuestion(topic, max)
+		return max
 	}
 	var next int
 	var t float32
@@ -129,23 +101,47 @@ func GetQuestionByRating(topic string, rating int) QuestionData {
 			break
 		}
 	}
+	return next
+}
 
-	var res QuestionData
-	db.First(&res, next)
-	return res
+func find(ls []int, el int)bool{
+	for _,found := range ls{
+		if found == el{
+			return true
+		}
+	}
+	fmt.Println("not found",el,ls)
+	return false
+}
+
+func GetNewQuestion(topic string, rating int, history []int)QuestionData{
+
+	var no int
+	topicData:=*(indexer[topic])
+	var questions []QuestionNote
+	questions=topicData.Questions
+
+	no=getNumberByRating(topicData,rating)
+	var id int = questions[no].ID
+	var last int = len(questions)-1
+	for {
+		if no ==last {
+			break
+		}
+		if !find(history, id){
+			break
+		}
+		no++
+		id = questions[no].ID
+	}
+	var questionData QuestionData
+	db.Find(&questionData, id)
+	return questionData
 }
 
 func Test() {
 	fmt.Println("testing database")
-	fmt.Println("found Topics:")
-	for topic, _ := range indexer {
-		fmt.Println(topic)
-		for i := 0; i < 3; i++ {
-
-			question := GetQuestion(topic, i)
-			fmt.Println(question.Title)
-		}
-	}
 	fmt.Println("indexer 'Plus':")
 	fmt.Println(*indexer["Plus"])
+
 }

@@ -39,16 +39,7 @@ export default {
   },
   methods:{
 
-    insertSkill(name,level){
-      this.skillMap[name]=level
-      // console.log(this.skillMap);
-      // console.log(JSON.stringify(this.skillMap));
-      var raw=JSON.stringify(this.skillMap)
-      // console.log("raw:",raw);
-      var newcookie="skillmap="+raw
-      document.cookie=newcookie
-      localStorage[name]=level
-    },
+    
     welcome(){
 
 
@@ -66,7 +57,6 @@ export default {
         }
       }
       // console.log("welcome found skills:",this.skillMap);
-      this.insertSkill("Plus",90)
 
 
     },

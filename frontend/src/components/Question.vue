@@ -32,11 +32,13 @@
           return
         }
         if (this.input==this.content.solution){
-          this.result=this.content.solution+" is correct!"
+          this.result=this.content.solution+" ist die richtig!"
           this.input=""
           this.$emit('solved')
         }else{
-          this.result="false!"
+          this.result=this.input+" ist leider Falsch. "+this.content.solution+' ist die richtige Antwort.'
+          this.input=""
+          this.$emit('failed')
         }
       },
       onEnter(){

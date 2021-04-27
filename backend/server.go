@@ -7,23 +7,18 @@ import (
 	"net/http"
 )
 
-func process(w http.ResponseWriter, request *http.Request) {
-	//fmt.Println("processing request")
+func getNew(w http.ResponseWriter, request *http.Request) {
 	decoder := json.NewDecoder(request.Body)
-
-	var init database.RequestData
-	decoder.Decode(&init)
-	fmt.Println(init)
-
-	var response interface{}
-	if init.Op == "GET" {
-		response = database.GetQuestion(init.Topic, init.No)
-	} else if init.Op == "GETINFO" {
-		response = database.GetTopicInformation(init.Topic)
-	} else if init.Op == "GETBYRATING" {
-		response = database.GetQuestionByRating(init.Topic, init.No)
+	var data database.RequestNew
+	err:=decoder.Decode(&data)
+	if err!=nil{
+		fmt.Println("json parsing error ",err)
 	}
 
+	fmt.Println("receved history:",data.History)
+
+	var response database.QuestionData=database.GetNewQuestion(data.Topic, data.Rating, data.History)
+	fmt.Println("sending id ",response.ID)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
@@ -32,8 +27,9 @@ func process(w http.ResponseWriter, request *http.Request) {
 	}
 }
 
+
 func main() {
 	database.Start()
-	http.HandleFunc("/api/", process)
+	http.HandleFunc("/api/new", getNew)
 	http.ListenAndServe(":3080", nil)
 }

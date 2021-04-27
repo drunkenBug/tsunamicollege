@@ -12,6 +12,12 @@ type RequestData struct {
         No int  `json:"no"`
 }
 
+type RequestNew struct{
+	Topic string `json:"topic"`
+	Rating int `json:"rating"`
+	History []int `json:"history"`
+}
+
 type QuestionNote struct{
 	ID int `json:"id"`
 	Rating int `json"rating"`

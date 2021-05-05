@@ -3,13 +3,15 @@
     <div class="question">
 
       <h2>{{content.title}}</h2>
-      <input class="test" type="number" v-model='input' ref="input" @keyup="keyup" >
-      <button class="test" type="button" name="button" @click='action' >
+      <h2>{{result}}</h2>
+
+      <input v-if="showInput" ref="input" class="test" type="number" v-model='input' @keyup="keyup" >
+
+      <button class="test" type="button" name="button" ref="action" @click='action' >
         <!-- <div class="go"> -->
           {{buttonMsg}}
         <!-- </div> -->
       </button>
-      <h2>{{result}}</h2>
     </div>
 
   </div>
@@ -22,6 +24,7 @@
     ],
     data(){
       return {
+        showInput:true,
         result:"",
         input:"",
         buttonMsg:"keine Ahnung",
@@ -38,23 +41,29 @@
         }
         if (this.input==this.content.solution){
           this.result=this.content.solution+" ist richtig!"
-          this.input=""
-          this.buttonMsg="nächste"
           this.$emit('solved')
-          this.action=this.next
         }else{
           this.result=this.input+" ist leider Falsch. "+this.content.solution+' ist die richtige Antwort.'
-          this.input=""
-          this.buttonMsg="nächste"
           this.$emit('failed')
-          this.action=this.next
         }
+        this.input=""
+        this.action=this.next
+        this.buttonMsg="next"
+        this.showInput=false
+        this.$refs.action.focus()
+
       },
       next(){
         this.$emit('next')
         this.buttonMsg="aufgeben"
         this.action=this.go
         this.input=""
+        this.showInput=true
+        // console.log(this.$refs.input.childNodes[0]);
+        this.$nextTick(()=>{
+          this.$refs.input.focus()
+        })
+
       },
       keyup(k){
         console.log(k.key);
@@ -66,8 +75,9 @@
       },
 
       start(){
-        this.$refs.input.focus()
-        this.result="..."
+        // this.$refs.input.focus()
+        this.result=""
+
       }
     },
   }

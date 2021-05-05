@@ -1,8 +1,4 @@
 
-<style media="screen">
-
-</style>
-
 <template>
     <div class="face-image">
 
@@ -39,7 +35,7 @@ export default {
   },
   methods:{
 
-    
+
     welcome(){
 
 

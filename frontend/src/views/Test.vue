@@ -1,12 +1,17 @@
 <template>
   <div class="test">
-    <h1>{{topic}}</h1>
+    <div class="face-image">
+
+    </div>
+    <div class="face">
+
+    </div>
+
+    <!-- <h1>{{topic}}</h1> -->
     <div v-if="questionsLoaded">
-      <Question :content="question" ref="question" @failed="failed" @solved="solved"/>
+      <Question :content="question" ref="question" @failed="failed" @solved="solved" @next="next"/>
     </div>
-    <div class="next">
-      <button class="test" type="button" ref="next" @click ="next">next</button>
-    </div>
+
   </div>
 
 
@@ -80,7 +85,6 @@ export default {
       this.rating+=change
       localStorage[this.topic]=this.rating
       console.log("new rating",this.rating);
-      this.$refs.next.focus()
 
 
     },
@@ -94,7 +98,6 @@ export default {
       this.rating-=change
       localStorage[this.topic]=this.rating
       console.log('new rating:',this.rating);
-      this.$refs.next.focus()
 
     },
     resetSkill(){

@@ -6,6 +6,7 @@
 
   </div>
   <router-view/>
+  
 </template>
 
 <style scoped src="@/style.css">

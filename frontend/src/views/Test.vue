@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <div class="face-image">
+    <div ref="face" class="face-image">
 
     </div>
     <div class="face">
@@ -34,7 +34,6 @@ export default {
       topic:this.$route.params.id,
 
       hist:[-1],
-      hakuna:[1],
 
       diffscale:0.2,//how much does the difference in difficulty get accounted for
       reward:1,
@@ -43,17 +42,16 @@ export default {
     }
   },
   mounted(){
-    console.log('hakuna: ',JSON.stringify(this.hakuna));
     if (localStorage[this.topic]==null){
-      console.log("no data on topic ",this.topic);
+      // console.log("no data on topic ",this.topic);
       localStorage[this.topic]=0
-    }else{
-      console.log(localStorage[this.topic])
     }
-    console.log("skill level:",localStorage[this.topic]);
+    // console.log("skill level:",localStorage[this.topic]);
     var rating=Math.round(localStorage[this.topic])
-    console.log('hist: ',this.hist);
+    // console.log('hist: ',this.hist);
     this.getNewQuestion(this.topic,rating)
+    this.$refs.face.classList.add("right")
+    // console.log(this.$refs.face);
   },
   methods:{
 
@@ -66,38 +64,29 @@ export default {
 
     getNewQuestion(topic,rating){
       var data={'topic':topic,'rating':rating,'history':this.hist}
-      console.log('sending data:',data);
       axios({method:'POST',url:'api/new',data:data,headers:{'content-type':'text/plain'}}).then(result =>{
         this.question=result.data
         this.questionsLoaded=true
-        console.log('receved question:',this.question);
 
       }).catch(error=>{
         console.log(error);
       })
     },
     solved(){
-      console.log("difficulty:",this.question.rating);
       this.rating=parseFloat(localStorage[this.topic])
-      console.log("start rating:",this.rating);
       var difference=this.question.rating-this.rating
       var change = Math.max(0,this.reward+difference*this.diffscale)
       this.rating+=change
       localStorage[this.topic]=this.rating
-      console.log("new rating",this.rating);
 
 
     },
     failed(){
-      console.log('failed');
-      console.log('difficulty:',this.question.rating);
       this.rating=parseFloat(localStorage[this.topic])
-      console.log('start rating:',this.rating);
       var difference=this.question.rating=this.rating
       var change = Math.max(0,this.penalty+difference*this.diffscale)
       this.rating-=change
       localStorage[this.topic]=this.rating
-      console.log('new rating:',this.rating);
 
     },
     resetSkill(){
@@ -106,15 +95,11 @@ export default {
 
 
     next(){
-      console.log("question:", this.question);
-      console.log("id:",this.question.id);
       this.hist.push(this.question.id)
       if (this.hist.length>10){
         this.hist=this.hist.slice(-10)
       }
-      console.log("history:",this.hist);
 
-      console.log("skill level:",localStorage[this.topic]);
       var rating=Math.round(localStorage[this.topic])
       // var hist = JSON.stringify(this.hist)
       this.getNewQuestion(this.topic,rating)

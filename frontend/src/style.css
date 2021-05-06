@@ -145,3 +145,11 @@ button.topicButton{
 .spacer{
   height:4em;
 }
+.right{
+  animation-name:joy;
+  animation-duration: 2;
+}
+@keyframes joy {
+    0%:{background: green}
+    100%:{background: red}
+}

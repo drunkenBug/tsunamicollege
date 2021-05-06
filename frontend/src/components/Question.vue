@@ -32,6 +32,10 @@
     },
     created(){
       this.action=this.go
+      this.$nextTick(()=>{
+        this.$refs.input.focus()
+        console.log("input found:",this.$refs.input);
+      })
     },
     methods:{
       go(){
@@ -66,7 +70,6 @@
 
       },
       keyup(k){
-        console.log(k.key);
         if (k.key=="Enter"){
           this.action()
         }else{

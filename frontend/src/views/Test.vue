@@ -1,6 +1,9 @@
 <template>
   <div class="test">
     <div ref="face" class="face-image">
+      <div id="star">
+
+      </div>
 
     </div>
     <div class="face">
@@ -50,7 +53,7 @@ export default {
     var rating=Math.round(localStorage[this.topic])
     // console.log('hist: ',this.hist);
     this.getNewQuestion(this.topic,rating)
-    this.$refs.face.classList.add("right")
+    //this.$refs.face.classList.add("right")
     // console.log(this.$refs.face);
   },
   methods:{

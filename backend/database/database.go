@@ -110,7 +110,7 @@ func find(ls []int, el int)bool{
 			return true
 		}
 	}
-	fmt.Println("not found",el,ls)
+	//fmt.Println("not found",el,ls)
 	return false
 }
 

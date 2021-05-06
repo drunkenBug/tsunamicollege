@@ -1,12 +1,16 @@
 
 <template>
-    <div class="face-image">
 
+
+
+    <div class="face-image">
+      <div class="joy" id="star">
+      </div>
     </div>
     <div class="face">
 
-    </div>
 
+    </div>
     <h1>Tsunami College</h1>
     <h2>Zeig was du kannst</h2>
 

@@ -1,14 +1,19 @@
 
 <template>
 
+    <div class="face-image" style="background:black;z-index:-100">
 
-
+    </div>
     <div class="face-image">
-      <div class="joy" id="star">
+      <div class="impuls" id="star">
+
+        <div class="color">
+        </div>
+
+
       </div>
     </div>
     <div class="face">
-
 
     </div>
     <h1>Tsunami College</h1>
@@ -38,11 +43,11 @@ export default {
     this.welcome()
   },
   methods:{
-
+    action(inp){
+      alert(inp)
+    },
 
     welcome(){
-
-
 
       var c=document.cookie;
       var cookies = c.split(";")
@@ -56,9 +61,6 @@ export default {
           break
         }
       }
-      // console.log("welcome found skills:",this.skillMap);
-
-
     },
 
   }

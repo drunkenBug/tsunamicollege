@@ -7,6 +7,7 @@
 
 }
 
+
 :root{
   --omega:#cce;
   /* --omega:#aeaeae; */
@@ -16,6 +17,7 @@
   --gamma:#005;
   --active:#4af;
   --passive:#020850;
+  --glow:0.0;
 }
 
 
@@ -73,6 +75,7 @@ a{
   .nav{
     text-decoration: none;
     font-size:2em;
+
     /* background: white; */
   }
 }
@@ -132,7 +135,7 @@ button.topicButton{
 }
 
 .face-image{
-  z-index: -100;
+  z-index:-100;
   padding: 0;
   border:0;
   width: 100%;
@@ -140,44 +143,69 @@ button.topicButton{
   top: 0px;
   left:0px;
   height: 400px;
-  background: black;
+  /* background: black; */
   background-image: url(assets/tsunamiwave.svg);
   background-repeat: no-repeat;
   background-size: 101%;
   /* background-position:left; */
   background-position:center;
+  background-size: 100%;
 }
 
-.joy {
-  animation-name:spin;
-  animation-duration:1s;
-  animation-timing-function: linear;
-  rotation:90deg;
-
-}
 #star{
-  z-index: -100;
+  z-index: +100;
   padding: 0;
   border:0;
+  height: 400px;
   width: 100%;
   position: absolute;
   top: 0px;
   left:0px;
-  height: 400px;
   background: transparent;
   color: red;
   background-image: url(assets/tsunamistar.svg);
   background-repeat: no-repeat;
   background-size: 101%;
+  /* background-size: cover;  */
   background-position:center;
+  filter:brightness(1.5)contrast(1);
+}
 
+.color{
+  height: 100%;
+  width: 100%;
+  background-image: url(assets/tsunamistarcolor.svg);
+  background-size:101%;
+  background-position:center;
+  mix-blend-mode:color;
+  filter:brightness(4.3)hue-rotate(15deg)saturate(var(--glow));
+}
+
+.impuls {
+  animation-name:impuls;
+  animation-duration:1s;
+  animation-timing-function: ease-in-out;
+}
+
+.impuls > .color {
+  animation-name:impulscolor;
+  animation-duration:4s;
+  animation-timing-function: ease-in-out;
+  /* filter:saturate(2); */
+}
+
+@keyframes impulscolor{
+  /* 0%{filter:brightness(4.3)hue-rotate(15deg)saturate(0);} */
+  10%{filter:brightness(4.3)hue-rotate(14deg)saturate(1);}
+  /* 100%{filter:brightness(4.3)hue-rotate(15deg)saturate(0);} */
 
 }
 
-@keyframes spin{
-  0%{transform: rotate(0deg) scale(1);}
-  50%{transform: rotate(135deg) scale(0.5);}
-  100%{transform: rotate(360deg) scale(1);}
+@keyframes impuls{
+  0%{transform: scale(1) }
+  50%{transform: scale(1.1) }
+  100%{transform: scale(1) }
 }
+
 @keyframes example {
 }

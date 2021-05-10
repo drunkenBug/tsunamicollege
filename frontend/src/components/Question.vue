@@ -2,7 +2,7 @@
   <div class="bubble">
     <div class="question">
 
-      <h2>{{content.title}}</h2>
+      <h2>{{title}}</h2>
       <h2>{{result}}</h2>
 
       <input v-if="showInput" ref="input" class="test" type="number" v-model='input' @keyup="keyup" >
@@ -22,8 +22,14 @@
     props:[
       'content',
     ],
+    watch:{
+      content(newTitle){
+        this.title=newTitle.title
+      }
+    },
     data(){
       return {
+        title:this.content.title,
         showInput:true,
         result:"",
         input:"",
@@ -44,20 +50,27 @@
           return
         }
         if (this.input==this.content.solution){
-          this.result=this.content.solution+" ist richtig!"
+          this.input=""
+          var newglow=getComputedStyle(document.documentElement).getPropertyValue('--glow')
+          newglow=parseFloat(newglow)+0.1
+          document.documentElement.style.setProperty('--glow',newglow)
           this.$emit('solved')
+          this.$emit('next')
+          return
         }else{
           this.result=this.input+" ist leider Falsch. "+this.content.solution+' ist die richtige Antwort.'
           this.$emit('failed')
+          this.input=""
+          this.action=this.next
+          this.buttonMsg="next"
+          this.showInput=false
+          this.$refs.action.focus()
         }
-        this.input=""
-        this.action=this.next
-        this.buttonMsg="next"
-        this.showInput=false
-        this.$refs.action.focus()
+
 
       },
       next(){
+
         this.$emit('next')
         this.buttonMsg="aufgeben"
         this.action=this.go

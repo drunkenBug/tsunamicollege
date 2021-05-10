@@ -1,7 +1,13 @@
 <template>
   <div class="test">
-    <div ref="face" class="face-image">
-      <div id="star">
+    <div class="face-image" style="z-index:-100;background:black">
+
+    </div>
+    <div ref="face" class="face-image" >
+      <div id="star" ref='star'>
+        <div class="color">
+
+        </div>
 
       </div>
 
@@ -57,6 +63,12 @@ export default {
     // console.log(this.$refs.face);
   },
   methods:{
+    joy(){
+      this.$refs.star.classList.remove("impuls")
+      setTimeout(()=>{
+        this.$refs.star.classList.add('impuls')
+      },10)
+    },
 
     getTopicInfo(topic){
       var data={"op":"GETINFO","topic":topic,"no":0}
@@ -81,6 +93,7 @@ export default {
       var change = Math.max(0,this.reward+difference*this.diffscale)
       this.rating+=change
       localStorage[this.topic]=this.rating
+      this.joy()
 
 
     },
@@ -107,6 +120,7 @@ export default {
       // var hist = JSON.stringify(this.hist)
       this.getNewQuestion(this.topic,rating)
       this.$refs.question.start()
+      // this.$refs.star.classList.remove("impuls")
     },
 
   }

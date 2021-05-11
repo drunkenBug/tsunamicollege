@@ -22,9 +22,13 @@
       }
     },
     mounted(){
-      console.log("created");
-      console.log(localStorage[this.topicID])
+      // console.log("created");
+      // console.log(localStorage[this.topicID])
+      if (localStorage[this.topicID]==null){
+        localStorage[this.topicID]=0
+      }
       this.createStyle()
+
     },
     methods:{
 

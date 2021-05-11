@@ -1,7 +1,6 @@
 <template>
   <div class="bubble">
     <div class="question">
-
       <h2>{{title}}</h2>
       <h2>{{result}}</h2>
 
@@ -51,9 +50,12 @@
         }
         if (this.input==this.content.solution){
           this.input=""
-          var newglow=getComputedStyle(document.documentElement).getPropertyValue('--glow')
-          newglow=parseFloat(newglow)+0.1
-          document.documentElement.style.setProperty('--glow',newglow)
+
+          var glow=parseFloat(localStorage.energy)
+          glow+=0.1
+          document.documentElement.style.setProperty('--glow',glow)
+          localStorage.energy=glow
+
           this.$emit('solved')
           this.$emit('next')
           return

@@ -178,7 +178,8 @@ button.topicButton{
   background-size:101%;
   background-position:center;
   mix-blend-mode:color;
-  filter:brightness(4.3)hue-rotate(15deg)saturate(var(--glow));
+  filter:brightness(1) saturate(var(--glow));
+  /* filter:saturate(0); */
 }
 
 .impuls {
@@ -196,7 +197,7 @@ button.topicButton{
 
 @keyframes impulscolor{
   /* 0%{filter:brightness(4.3)hue-rotate(15deg)saturate(0);} */
-  10%{filter:brightness(4.3)hue-rotate(14deg)saturate(1);}
+  10%{filter:brightness(1)saturate(1);}
   /* 100%{filter:brightness(4.3)hue-rotate(15deg)saturate(0);} */
 
 }

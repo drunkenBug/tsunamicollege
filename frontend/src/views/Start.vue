@@ -40,7 +40,13 @@ export default {
     }
   },
   mounted(){
-    this.welcome()
+    // this.welcome()
+    if (localStorage.energy == null){
+      localStorage.energy=0
+    }
+    console.log('energy');
+    document.documentElement.style.setProperty('--glow',parseFloat(localStorage.energy))
+
   },
   methods:{
     action(inp){
